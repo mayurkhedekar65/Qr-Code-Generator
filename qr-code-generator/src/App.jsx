@@ -126,7 +126,7 @@ function App() {
       </form>
       <div>
         <img
-          style={{ ...qrStyles, backgroundColor: `#${bgColor}` }}
+          style={{ ...qrStyles, backgroundColor: `#${bgColor}`, background: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)', backdropFilter: 'blur(8px)', boxShadow: 'rgba(0, 0, 0, 0.3) 0px 4px 8px' }}
           src={qrCode}
           alt="QR Code"
         />
@@ -163,8 +163,9 @@ function App() {
                 margin: "10px 0",
                 padding: "10px",
                 borderRadius: "8px",
-                backgroundColor: "#fff",
-                boxShadow: "rgba(0, 0, 0, 0.1) 0px 2px 4px",
+                backgroundColor: "rgba(255, 255, 255, 0.5)",
+                backdropFilter: "blur(8px)",
+                boxShadow: "rgba(0, 0, 0, 0.3) 0px 4px 8px",
                 position: "relative",
                 cursor: "pointer",
               }}
