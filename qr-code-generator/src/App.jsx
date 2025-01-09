@@ -148,48 +148,54 @@ function App() {
         }}
       />
 
-      <h2>Generated QR Codes</h2>
+      {qrList.length === 0 ? (
+        <p>No QR Codes generated yet</p>
+      ) : (
+        <h2>Generated QR Codes</h2>
+      )}
+
       <div>
-        {currentItems.map((qr, index) => (
-          <div
-            key={index}
-            style={{
-              margin: "10px 0",
-              padding: "10px",
-              borderRadius: "8px",
-              backgroundColor: "#fff",
-              boxShadow: "rgba(0, 0, 0, 0.1) 0px 2px 4px",
-              position: "relative",
-              cursor: "pointer",
-            }}
-          >
-            <img
-              src={qr.qrCode}
-              alt={`QR Code ${index}`}
+        {qrList.length > 0 &&
+          currentItems.map((qr, index) => (
+            <div
+              key={index}
               style={{
-                width: `${qr.size}px`,
-                height: `${qr.size}px`,
-                backgroundColor: `#${qr.bgColor}`,
-              }}
-              onClick={() => handleQrClick(qr)}
-            />
-            <p style={{ margin: "5px 0", fontWeight: "bold" }}>{qr.word}</p>
-            <span
-              style={{
-                position: "absolute",
-                top: "5px",
-                right: "10px",
+                margin: "10px 0",
+                padding: "10px",
+                borderRadius: "8px",
+                backgroundColor: "#fff",
+                boxShadow: "rgba(0, 0, 0, 0.1) 0px 2px 4px",
+                position: "relative",
                 cursor: "pointer",
-                color: "red",
-                fontWeight: "bold",
-                fontSize: "20px",
               }}
-              onClick={() => handleRemoveQr(startIndex + index)}
             >
-              ×
-            </span>
-          </div>
-        ))}
+              <img
+                src={qr.qrCode}
+                alt={`QR Code ${index}`}
+                style={{
+                  width: `${qr.size}px`,
+                  height: `${qr.size}px`,
+                  backgroundColor: `#${qr.bgColor}`,
+                }}
+                onClick={() => handleQrClick(qr)}
+              />
+              <p style={{ margin: "5px 0", fontWeight: "bold" }}>{qr.word}</p>
+              <span
+                style={{
+                  position: "absolute",
+                  top: "5px",
+                  right: "10px",
+                  cursor: "pointer",
+                  color: "red",
+                  fontWeight: "bold",
+                  fontSize: "20px",
+                }}
+                onClick={() => handleRemoveQr(startIndex + index)}
+              >
+                ×
+              </span>
+            </div>
+          ))}
       </div>
 
       <div style={{ marginTop: "20px" }}>
