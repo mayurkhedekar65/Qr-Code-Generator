@@ -26,17 +26,11 @@ function App() {
   const [page, setPage] = useState(0);
   const [selectedQr, setSelectedQr] = useState(null);
 
-  const handleTextChange = (e) => {
-    setTemp(e.target.value);
-  };
+  const itemsPerPage = 5; // Number of items per page
 
-  const handleBgColorChange = (e) => {
-    setBgColor(e.target.value);
-  };
-
-  const handleDimensionChange = (e) => {
-    setSize(e.target.value);
-  };
+  const handleTextChange = (e) => setTemp(e.target.value);
+  const handleBgColorChange = (e) => setBgColor(e.target.value);
+  const handleDimensionChange = (e) => setSize(e.target.value);
 
   useEffect(() => {
     setQrCode(
@@ -60,10 +54,16 @@ function App() {
   };
 
   const handleRemoveQr = (index) => {
-    setQrList((prevList) => prevList.filter((_, idx) => idx !== index));
+    setQrList((prevList) => {
+      const updatedList = prevList.filter((_, idx) => idx !== index);
+      const totalPages = Math.ceil(updatedList.length / itemsPerPage);
+      if (page >= totalPages && totalPages > 0) {
+        setPage(totalPages - 1); // Adjust page if necessary
+      }
+      return updatedList;
+    });
   };
 
-  const itemsPerPage = 5;
   const startIndex = page * itemsPerPage;
   const currentItems = qrList.slice(startIndex, startIndex + itemsPerPage);
 
@@ -79,13 +79,8 @@ function App() {
     }
   };
 
-  const handleQrClick = (qr) => {
-    setSelectedQr(qr);
-  };
-
-  const closePopup = () => {
-    setSelectedQr(null);
-  };
+  const handleQrClick = (qr) => setSelectedQr(qr);
+  const closePopup = () => setSelectedQr(null);
 
   return (
     <div style={appStyle}>
@@ -96,7 +91,7 @@ function App() {
             style={inputStyle}
             type="text"
             placeholder="Enter Your Text to Encode"
-            value={temp} // Reset after QR code is generated
+            value={temp}
             handleOnChange={handleTextChange}
           />
           <Button text="Generate" type="submit" />
