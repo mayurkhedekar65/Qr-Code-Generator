@@ -83,7 +83,7 @@ function App() {
   const closePopup = () => setSelectedQr(null);
 
   return (
-    <div style={appStyle}>
+    <div style={{ ...appStyle, background: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)', backgroundBlendMode: 'soft-light', minHeight: '100vh', padding: '20px' }}>
       <h1>QR Code Generator</h1>
       <form onSubmit={handleGenerate}>
         <div>
